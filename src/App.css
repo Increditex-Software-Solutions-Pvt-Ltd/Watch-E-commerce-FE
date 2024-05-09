@@ -1,38 +1,56 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&display=swap');
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #fff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.fw-semibold {
+    font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.small {
+    font-size: 12px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.medium {
+    font-size: 15.7px;
 }
 
-.App-link {
-  color: #61dafb;
+.normal {
+    font-size: 17px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.big {
+    font-size: 20px;
+}
+
+i {
+    cursor: pointer;
+    color: #747474;
+    transition: all 0.5s ease-in-out;
+}
+
+i:hover {
+    color: #df6447;
+}
+
+.offcanvas-body.dropbox {
+    min-height: 480px !important;
+    /* Set desired height */
+    overflow-y: auto;
+    /* Enable vertical scroll if content overflows */
+}
+
+.stylefont{
+    font-family: "Briem Hand", cursive;
+}
+.sec-pad{
+    padding-top: 40px;
+}
+.watchcard p{
+    transition: all 0.5s;
+}
+.watchcard p:hover{
+  text-decoration: underline;
 }

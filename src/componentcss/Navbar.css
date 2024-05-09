@@ -1,0 +1,62 @@
+.checkboxtoggler {
+    width: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    cursor: pointer;
+  }
+  
+  .line-1 {
+    background: #df6447;
+    height: 2.3px;
+    transition-duration: 500ms;
+  }
+  
+  .line-2 {
+    background: #df6447;
+    height: 2.3px;
+    transition-duration: 500ms;
+  }
+  
+  .line-3 {
+    background: #df6447;
+    height: 2.3px;
+    transition-duration: 500ms;
+  }
+  
+  #toggleChecker {
+    height: 3em;
+    width: 100%;
+    display: none;
+  }
+  
+  #toggleChecker:checked + #togglerLable .checkboxtoggler .line-1 {
+    -webkit-transform: rotate(45deg) translateY(5.1px) translateX(5.1px);
+    -ms-transform: rotate(45deg) translateY(5.1px) translateX(5.1px);
+    transform: rotate(45deg) translateY(5.1px) translateX(5.1px);
+  }
+  
+  #toggleChecker:checked + #togglerLable .checkboxtoggler .line-2 {
+    -webkit-transform: rotate(-45deg) translateY(0em) translateX(0.89px);
+    -ms-transform: rotate(-45deg) translateY(0em) translateX(0.89px);
+    transform: rotate(-45deg) translateY(0em) translateX(0.89px);
+  }
+  
+  #toggleChecker:checked + #togglerLable .checkboxtoggler .line-3 {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .nav-item .nav-link{
+    color: #505050 !important;
+    font-weight: 480;
+    font-size: 14px;
+  }
+  .navbar-nav .nav-item {
+    position: relative;
+  }
+  @media(max-width:700px){
+    .undernavbar{
+      display: none !important;
+    }
+  }
+  

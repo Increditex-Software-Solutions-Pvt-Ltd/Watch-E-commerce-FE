@@ -1,0 +1,19 @@
+.searchbar{
+    border:0;
+    border-bottom: 1px solid rgb(80, 77, 77);
+    border-radius: 0;
+    transition: all 0.5s ease;
+    font-size: 23px;
+    box-shadow: none !important;
+    font-weight: 450;
+    letter-spacing: 0.4px;
+}
+.searchbar:focus{
+    border-bottom:1px solid #df6447;
+}
+.top-10{
+    top: 10px;
+}
+.w-60{
+    width: 60%;
+}

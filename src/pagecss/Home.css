@@ -1,0 +1,175 @@
+.lt-2 {
+  letter-spacing: 2px;
+}
+
+.buttonread {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  color: #0f1923;
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all .15s ease;
+}
+
+.buttonread::before,
+.buttonread::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #7D8082;
+  transition: all .15s ease;
+}
+
+.buttonread::before {
+  top: 0;
+  border-bottom-width: 0;
+}
+
+.buttonread::after {
+  bottom: 0;
+  border-top-width: 0;
+}
+
+.buttonread:active,
+.buttonread:focus {
+  outline: none;
+}
+
+.buttonread:active::before,
+.buttonread:active::after {
+  right: 3px;
+  left: 3px;
+}
+
+.buttonread:active::before {
+  top: 3px;
+}
+
+.buttonread:active::after {
+  bottom: 3px;
+}
+
+.buttonread_lg {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #0f1923;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.buttonread_lg::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background-color: #0f1923;
+}
+
+.buttonread_lg::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background-color: #0f1923;
+  transition: all .2s ease;
+}
+
+.buttonread_sl {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: -8px;
+  width: 0;
+  background-color: #ff4655;
+  transform: skew(-15deg);
+  transition: all .2s ease;
+}
+
+.buttonread_text {
+  position: relative;
+}
+
+.buttonread:hover {
+  color: #0f1923;
+}
+
+.buttonread:hover .buttonread_sl {
+  width: calc(100% + 15px);
+}
+
+.buttonread:hover .buttonread_lg::after {
+  background-color: #eed5d5;
+}
+
+.playicon i {
+  position: relative;
+}
+
+.playicon i::after {
+  position: absolute;
+  content: "";
+  width: 90px;
+  height: 90px;
+  border: 2px solid white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.card.featurecard img {
+  transition: transform 5s ease;
+  cursor: pointer;
+}
+
+.card.featurecard:hover img {
+  transform: scale(1.1);
+}
+
+.rotateani {
+  animation: rotate 25s infinite linear;
+}
+
+.image-container{
+  position: relative;
+}
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:#eef;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+ 
+  100% {
+    transform: rotate(360deg);
+  }
+}

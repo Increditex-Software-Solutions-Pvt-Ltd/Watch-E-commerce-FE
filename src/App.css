@@ -18,7 +18,7 @@ body {
 }
 
 .normal {
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .big {
@@ -53,4 +53,46 @@ i:hover {
 }
 .watchcard p:hover{
   text-decoration: underline;
+}
+.sec-padding{
+    padding: 90px 0;
+}
+.carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: -45px;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-right: 15%;
+    margin-bottom: 1rem;
+    margin-left: 15%;
+}
+.carousel-indicators [data-bs-target] {
+    box-sizing: content-box;
+    flex: 0 1 auto;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #c08373;
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 50% !important;
+    transition: all 0.3s ease-in-out;
+}
+.carousel-indicators [data-bs-target].active {
+    opacity: 1;
+    width: 40px !important;
+    height: 15px;
+    background-color: #ff4655 !important;
+    border-radius: 10px !important;
+}
+.text-dam{
+    color:#ff4655;
 }

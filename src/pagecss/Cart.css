@@ -1,0 +1,24 @@
+.continueshop {
+    position: relative;
+    display: inline-block;
+    padding: 15px 60px;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 490;
+    text-decoration: none;
+    color: white;
+    background-color:#ff4655;
+    cursor: pointer;
+    transition:all 0.5s;
+    border: 2px solid #ff4655;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #ff4655;
+  }
+  .continueshop:hover{
+    opacity: 0.8;
+  }
+  .continueshop:active{
+    transform: scale(0.9);
+  }

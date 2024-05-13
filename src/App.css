@@ -14,7 +14,7 @@ body {
 }
 
 .medium {
-    font-size: 15.7px;
+    font-size: 16px;
 }
 
 .normal {
@@ -95,4 +95,17 @@ i:hover {
 }
 .text-dam{
     color:#ff4655;
+}
+.offcanvas-backdrop {
+    position: fixed;
+    top: 104.5px !important;
+    left: 0;
+    z-index: 10 !important;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
+.nav-link.link:hover{
+    text-decoration: underline;
+    transition: all 0.3s;
 }

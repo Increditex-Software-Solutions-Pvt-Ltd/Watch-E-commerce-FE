@@ -8,7 +8,9 @@ body {
 .fw-semibold {
     font-weight: 400;
 }
-
+.text-head{
+    color: #040f16;
+}
 .small {
     font-size: 12px;
 }
@@ -70,6 +72,9 @@ i:hover {
     margin-bottom: 1rem;
     margin-left: 15%;
 }
+.lt-1{
+    letter-spacing: 0.9px;
+}
 .carousel-indicators [data-bs-target] {
     box-sizing: content-box;
     flex: 0 1 auto;
@@ -98,7 +103,7 @@ i:hover {
 }
 .offcanvas-backdrop {
     position: fixed;
-    top: 104.5px !important;
+    top: 112px !important;
     left: 0;
     z-index: 10 !important;
     width: 100vw;
@@ -109,3 +114,26 @@ i:hover {
     text-decoration: underline;
     transition: all 0.3s;
 }
+.bg-semilight{
+    background-color: #fafafa;
+}
+::-webkit-scrollbar {
+    width: 8px; /* You can adjust this value for the desired thickness */
+  }
+  
+  /* Customize the track (background of the scrollbar) */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+  }
+  
+  /* Customize the handle (scrollbar itself) */
+  ::-webkit-scrollbar-thumb {
+    background: #c0c0c0; 
+    border-radius: 10px;
+  }
+  
+  /* Customize the handle when hovered */
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(0, 0%, 33%); 
+  }

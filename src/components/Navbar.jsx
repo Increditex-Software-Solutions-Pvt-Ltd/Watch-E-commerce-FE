@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../componentcss/Navbar.css';
 import { NavLink } from 'react-router-dom';
 import Sidebar from '../UI/Sidebar';
 import Searchbar from '../UI/Searchbar';
 import Loginsidebar from '../UI/Loginsidebar';
+import { CartContext } from '../context/CartContext';
 
 
 const Navbar = () => {
+
+  const {state} = useContext(CartContext);
+  const {cart} = state;
 
   const handleScrollTop=()=>{
      window.scrollTo({top:0,behavior:"smooth"})
@@ -35,9 +39,12 @@ const Navbar = () => {
               <li data-bs-toggle="offcanvas" data-bs-target="#searchbar"><i class="bi bi-search" style={{ fontSize: "19px" }}></i>
               </li>
               <li>
-                <NavLink onClick={handleScrollTop} to="/cart" className="nav-link">
+                {cart.length>0 ? <NavLink onClick={handleScrollTop} to="/cart" className="nav-link">
                 <i class="bi bi-bag" style={{ fontSize: "19px" }}></i>
-                </NavLink>
+                </NavLink>: <NavLink onClick={handleScrollTop} to="/emptycart" className="nav-link">
+                <i class="bi bi-bag" style={{ fontSize: "19px" }}></i>
+                </NavLink>}
+               
                 </li>
               <li data-bs-toggle="offcanvas" data-bs-target="#loginsidebar"><i class="bi bi-person" style={{ fontSize: "23px" }}></i></li>
             </ul>

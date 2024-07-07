@@ -3,21 +3,22 @@ import '../componentcss/Navbar.css';
 import { NavLink } from 'react-router-dom';
 import Sidebar from '../UI/Sidebar';
 import Searchbar from '../UI/Searchbar';
-import Loginsidebar from '../UI/Loginsidebar';
 import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
 
 
 const Navbar = () => {
 
-  const {state} = useContext(CartContext);
-  const {cart} = state;
+  const { state: cartState } = useContext(CartContext);
+  const {isAuthenticated,user,logout} = useContext(AuthContext);
 
-  const handleScrollTop=()=>{
-     window.scrollTo({top:0,behavior:"smooth"})
+
+  const handleScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
-  
+
   return (
-    <div className="position-sticky top-0" style={{zIndex:"99"}}>
+    <div className="position-sticky top-0" style={{ zIndex: "99" }}>
       <header className="navbar bg-white shadow-sm ">
         <div className="container-fluid d-flex justify-content-between py-1">
           <input id="toggleChecker" type="checkbox" />
@@ -27,9 +28,9 @@ const Navbar = () => {
               <div className="line-2"></div>
               <div className="line-3"></div>
             </div>
-           
+
           </label>
-           <Sidebar  targetId="filtersidebar"/>
+          <Sidebar targetId="filtersidebar" />
           <div>
             <NavLink onClick={handleScrollTop} to="/" className="navbar-brand fs-5 fw-semibold" style={{ color: '#df6447' }}>LOGO</NavLink>
           </div>
@@ -39,19 +40,33 @@ const Navbar = () => {
               <li data-bs-toggle="offcanvas" data-bs-target="#searchbar"><i class="bi bi-search" style={{ fontSize: "19px" }}></i>
               </li>
               <li>
-                {cart.length>0 ? <NavLink onClick={handleScrollTop} to="/cart" className="nav-link">
-                <i class="bi bi-bag" style={{ fontSize: "19px" }}></i>
-                </NavLink>: <NavLink onClick={handleScrollTop} to="/emptycart" className="nav-link">
-                <i class="bi bi-bag" style={{ fontSize: "19px" }}></i>
-                </NavLink>}
-               
-                </li>
-              <li data-bs-toggle="offcanvas" data-bs-target="#loginsidebar"><i class="bi bi-person" style={{ fontSize: "23px" }}></i></li>
+                {cartState.cart.length === 0 ? (
+                  <NavLink onClick={handleScrollTop} to="/emptycart" className="nav-link">
+                    <i class="bi bi-bag" style={{ fontSize: "19px" }}></i>
+                  </NavLink>
+                ) : (<NavLink onClick={handleScrollTop} to="/cart" className="nav-link">
+                  <i className="bi bi-bag position-relative" style={{ fontSize: "19px", zIndex: "0" }}>
+                    <span className="position-absolute start-100 translate-middle d-flex justify-content-center align-items-center  bg-danger rounded-circle" style={{ height: "17px", width: "17px", zIndex: '1', top: '2px' }}>
+                      <span className="" style={{ fontSize: '10px', color: 'white' }}>{cartState.cart.length}</span>
+                    </span>
+                  </i>
+                </NavLink>)}
+
+              </li>
+              <li>
+                {isAuthenticated ? (<button className="btn btn-link">
+                  <span className="me-1"><i className="bi bi-person-circle" style={{ fontSize: "23px" }}></i></span>
+                  {user?.firstName}
+                </button>):
+                (<NavLink to="/login">
+                  <i className="bi bi-person" style={{fontSize:"23px"}}></i>
+                </NavLink>)}
+              </li>
             </ul>
           </div>
         </div>
-        <Loginsidebar targetId="loginsidebar"/>
-         <Searchbar targetId="searchbar"/>
+
+        <Searchbar targetId="searchbar" />
         <div className="container-fluid d-flex justify-content-center py-1 position-relative undernavbar">
           <ul className="navbar-nav d-flex flex-row gap-5">
             <li className="nav-item ">

@@ -27,13 +27,13 @@ const AccessoriesCollectionPage = () => {
 
           </div>
           <div className="col-lg-9">
-            <div className="row g-3">
+            <div className="row g-4">
               {collection.length ? collection.map((product) => {
                 return (
-                  <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                  <div className="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div className="card watchcard border-0 rounded-0 h-100">
-                      <div className="card-header p-0 border-bottom-0" style={{ height: "350px" }}>
-                        <img src={`https://watch-e-commerce-be.onrender.com/${product.images[0].replace(/\\/g, "/")}`} className="img-fluid object-fit-cover" alt="" style={{ height: "100%" }} />
+                      <div className="card-header p-0 border-bottom-0" >
+                        <img src={`https://watch-e-commerce-be.onrender.com/${product.images[0].replace(/\\/g, "/")}`} className="img-fluid object-fit-cover" alt="" style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }}  />
                       </div>
                       <div className="card-body text-start">
                         <p className="medium mb-1">

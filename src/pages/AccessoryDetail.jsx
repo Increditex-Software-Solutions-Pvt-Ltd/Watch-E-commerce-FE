@@ -1,21 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../pagecss/ProductDetails.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Loader from '../components/Loader';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { CartContext } from '../context/CartContext';
+import { ADD_TO_CART, CartContext } from '../context/CartContext';
 
 
 const AccessoryDetail = () => {
     const { id } = useParams();
   const [collection, setCollection] = useState({});
   const [images, setImages] = useState([])
- 
+  const {state:cartState,dispatch} =  useContext(CartContext);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     setCollection({})
@@ -30,9 +32,16 @@ const AccessoryDetail = () => {
       });
   }, [id]);
 
+  const isItemInCart = (productId) => {
+    return Array.isArray(cartState.cart) && cartState.cart.some(item => item.productId === productId);
+  };
+
+  const handleAddToBag=()=>{
+      dispatch({type:ADD_TO_CART,payload:{...collection,quantity:1,cartId:`${collection.productId}-${Date.now()}`}});
+  }
 
   return (
-    <section className="bg-body" style={{ height: "100vh" }}>
+    <section className="bg-body pb-4">
       {images.length ? (<div className="container">
         <div className="py-3">
           <span className="text-dark" style={{ fontSize: "17px", fontWeight: "400" }}>{collection.modelName}</span>
@@ -53,7 +62,7 @@ const AccessoryDetail = () => {
           <div className="col-lg-5 col-sm-12 col-12">
             <div className="">
               <span className="text-secondary big" style={{ fontWeight: "500" }}>{collection.modelName}</span>
-              <h4 className="text-head my-4 lt-1">{collection.description}</h4>
+              <h4 className="my-4 lt-1" style={{fontSize:'15px'}}>{collection.description}</h4>
 
               <ul className="d-flex flex-row align-items-center list-unstyled gap-1 mt-3 star-color border-2 border-bottom pb-3">
                 <li className="nav-item">
@@ -92,17 +101,19 @@ const AccessoryDetail = () => {
                   </div>
                 </div>
                 <div className="card-body bg-semilight shadow-sm">
-                  <div className="d-flex flex-row align-items-center">
-                    <div className="rounded-3 counterbox overflow-hidden">
-                      <button className="counterbtn bg-white border-0" style={{fontSize:"22px"}}>-</button>
-                      <span className='px-3'></span>
-                      <button className="counterbtn bg-white border-0" style={{fontSize:"22px"}}>+</button>
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                     <button className="addtobag">Add To Bag</button>
-                     <button className="buynow">Buy Now</button>
+              
+                  <div className="mt-1">
+                     <button className={`${!isItemInCart(collection.productId) ? 'addtobag':'gotobag'}`} onClick={()=>{
+                       if(!isItemInCart(collection.productId)){
+                          handleAddToBag();
+                       }
+                       else{
+                         navigate('/cart');
+                       }
+                     }}>
+                        {!isItemInCart(collection.productId)? 'Add to Bag':'Go to Bag'}
+                     </button>
+                     {!isItemInCart(collection.productId) && <button className="buynow">Buy Now</button>}
                   </div>
                 </div>
               </div>

@@ -10,7 +10,7 @@ import { AuthContext } from '../context/AuthContext';
 const Navbar = () => {
 
   const { state: cartState } = useContext(CartContext);
-  const {isAuthenticated,user,logout} = useContext(AuthContext);
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
 
 
   const handleScrollTop = () => {
@@ -54,13 +54,20 @@ const Navbar = () => {
 
               </li>
               <li>
-                {isAuthenticated ? (<button className="btn btn-link">
-                  <span className="me-1"><i className="bi bi-person-circle" style={{ fontSize: "23px" }}></i></span>
-                  {user?.firstName}
-                </button>):
-                (<NavLink to="/login">
-                  <i className="bi bi-person" style={{fontSize:"23px"}}></i>
-                </NavLink>)}
+                {isAuthenticated ? (
+                  <div className="dropdown w-100">
+                    <button className="btn btn-danger dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown">
+                      <span className="me-2"><i className="bi bi-person-circle text-white" style={{ fontSize: "18px" }}></i></span>
+                      <span style={{ fontSize: "14px" }}>{user?.firstName}</span>
+                    </button>
+                    <ul class="dropdown-menu w-100 p-0" style={{position:"absolute",left:"0px",minWidth:"100px"}}>
+                     <li className="dropdown-item p-1" style={{fontSize:"15px",cursor:"pointer"}} onClick={logout}>Logout</li>
+                      </ul>
+                  </div>
+                ) :
+                  (<NavLink to="/login">
+                    <i className="bi bi-person" style={{ fontSize: "23px" }}></i>
+                  </NavLink>)}
               </li>
             </ul>
           </div>

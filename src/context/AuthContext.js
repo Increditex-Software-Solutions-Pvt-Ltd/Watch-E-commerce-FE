@@ -1,12 +1,14 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext,useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 
 const AuthContext = createContext();
 
 const AuthProvider=({children})=>{
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
+    
     const navigate = useNavigate(); 
    
     useEffect(()=>{
@@ -18,21 +20,21 @@ const AuthProvider=({children})=>{
         }
     },[]);
     
-    const fetchUserData = async (token,userId) => {
+    const fetchUserData = async (token, userId) => {
         try {
-             const response = await axios.get(`https://watch-e-commerce-be.onrender.com/users/${userId}`,{
-                headers:{Authorization:`Bearer ${token}`}
-             });
-            setUser(response.data.user);
             
+            const response = await axios.get(`https://watch-e-commerce-be-e9sn.onrender.com/users/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setUser(response.data.user);
         } catch (error) {
-            console.error("error fetching the user data",error);
+            console.error("Error fetching the user data:", error.response ? error.response.data : error.message);
         }
-    }
+    };
 
     const login = (token,userId) => {
         localStorage.setItem('token', token);
-        localStorage.setItem('userId',userId)
+        localStorage.setItem('userId',userId);
         setIsAuthenticated(true);
         fetchUserData(token,userId)
         navigate('/');
@@ -42,8 +44,9 @@ const AuthProvider=({children})=>{
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         setIsAuthenticated(false);
+      
         setUser(null);
-        navigate('/login');
+        navigate('/');
     }
 
     return(

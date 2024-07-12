@@ -11,6 +11,7 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const INCREMENT_QUANTITY = 'INCREMENT_QUANTITY';
 export const DECREMENT_QUANTITY = 'DECREMENT_QUANTITY';
+export const SET_CART = 'SET_CART';
 
 const convertToNumber = (str) => {
   if (typeof str === 'string') {
@@ -27,6 +28,8 @@ const cartReducer = (state, action) => {
   let newCart;
 
   switch (action.type) {
+    case SET_CART:
+      return {...state,cart:action.payload,total:cartTotal(action.payload)}
     case ADD_TO_CART:
       const existingCartItem = state.cart.find(item => item.cartId === action.payload.cartId);
       if (existingCartItem) {
@@ -48,6 +51,7 @@ const cartReducer = (state, action) => {
       newCart = state.cart.map(item => item.cartId === action.payload ? { ...item, quantity: item.quantity - 1 } : item).filter(item => item.quantity > 0);
       return { ...state, cart: newCart, total: cartTotal(newCart) };
 
+   
     default:
       return state;
   }

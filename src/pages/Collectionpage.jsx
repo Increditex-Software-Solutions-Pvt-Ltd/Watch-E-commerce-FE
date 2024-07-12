@@ -12,7 +12,7 @@ const Collectionpage = () => {
 
   useEffect(() => {
     setCollection([])
-    axios.get(`https://watch-e-commerce-be.onrender.com/products/collection/${name}`).then((res) => {
+    axios.get(`https://watch-e-commerce-be-e9sn.onrender.com/products/collection/${name}`).then((res) => {
       setCollection(res.data.Products)
 
     })
@@ -27,7 +27,7 @@ const Collectionpage = () => {
       <div className="container-fluid">
         <div className='row g-4 mt-5'>
           <div className="col-lg-3 col-md-3 col-sm-12">
-            <div className="card rounded-3 filtercard position-sticky" style={{top:"50px"}}>
+            {/* <div className="card rounded-3 filtercard position-sticky" style={{top:"50px"}}>
               <div className="card-header" style={{ backgroundColor: '#dfeaf6' }}>
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
@@ -136,7 +136,7 @@ const Collectionpage = () => {
                 </div>
 
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="col-lg-9">
             <div className="row g-4 mb-4 overflow-hidden">
@@ -145,7 +145,7 @@ const Collectionpage = () => {
                   <div className="col-lg-3 col-md-6 col-sm-6 col-12" key={product.name}>
                     <div className="card watchcard border-0 rounded-0 h-100">
                       <div className="card-header p-0 border-bottom-0" style={{ height: "280px" }}>
-                        <img src={`https://watch-e-commerce-be.onrender.com/${product.images[0].replace(/\\/g, "/")}`} className="img-fluid object-fit-cover" alt="" style={{ height: "100%" }} />
+                        <img src={`https://watch-e-commerce-be-e9sn.onrender.com/${product.images[0].replace(/\\/g, "/")}`} className="img-fluid object-fit-cover" alt="" style={{ height: "100%" }} />
                       </div>
                       <div className="card-body text-start">
                         <p className="medium mb-1">

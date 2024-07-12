@@ -57,10 +57,11 @@ const Login = () => {
         }
         else {
             try {
-                const response = await axios.post('https://watch-e-commerce-be.onrender.com/users/login',formData);
+                const response = await axios.post('https://watch-e-commerce-be-e9sn.onrender.com/users/login',formData);
                 
-                login(response.data.token);
-                console.log(response.data.token);
+                const {token,userId} = response.data;
+                login(token,userId);
+                console.log('LOGIN RESPONSE',token,userId);
                 navigate('/');
             } catch (error) {
                 console.log('Error logging in',error.response.data)

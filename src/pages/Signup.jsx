@@ -11,7 +11,7 @@ const Signup = () => {
     email: "",
     password: "",
     phoneNumber: "", 
-    address: "" 
+  
   });
 
   const [error, setError] = useState({
@@ -20,7 +20,7 @@ const Signup = () => {
     email: "",
     password: "",
     phoneNumber: "",
-    address: "" 
+  
   });
 
   const handleOnChange = (e) => {
@@ -63,7 +63,7 @@ const Signup = () => {
       setError(newErrors);
     } else {
       try {
-        const response = await axios.post('https://watch-e-commerce-be.onrender.com/users/register', formData);
+        const response = await axios.post('https://watch-e-commerce-be-e9sn.onrender.com/users/register', formData);
         console.log("Signup successful:", response.data);
         navigate('/login');
       } catch (error) {
@@ -125,10 +125,7 @@ const Signup = () => {
                 <input type="text" className="form-control rounded-0 border-2 shadow-none" placeholder="Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleOnChange} />
                 <label htmlFor="floatingInput">Phone Number (optional)</label>
               </div>
-              <div className="form-floating mb-4">
-                <input type="text" className="form-control rounded-0 border-2 shadow-none" placeholder="Address" name="address" value={formData.address} onChange={handleOnChange} />
-                <label htmlFor="floatingInput">Address (optional)</label>
-              </div>
+            
             </div>
 
             <a href="" className="text-secondary normal nav-link link mt-3" style={{ fontWeight: "490", fontSize: "16px" }}>Forgot your password?</a>

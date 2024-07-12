@@ -13,6 +13,7 @@ import Signup from './pages/Signup'
 import ProtectedRoute from './ProtectedRoute'
 import PublicRoute from './PublicRoute'
 import Checkout from './pages/Checkout'
+import Deliverycheckout from './pages/Deliverycheckout'
 
 
 const AllRoute = () => {
@@ -30,6 +31,7 @@ const AllRoute = () => {
       <Route path='/login' element={<PublicRoute><Login/></PublicRoute>} />
       <Route path='/signup' element={<PublicRoute><Signup /></PublicRoute>} />
       <Route path='/checkout' element={<ProtectedRoute><Checkout/></ProtectedRoute>}/>
+      <Route path='/select-delivery' element={<ProtectedRoute><Deliverycheckout/></ProtectedRoute>}/>
 
     </Routes>
   )

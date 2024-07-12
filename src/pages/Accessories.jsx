@@ -7,7 +7,7 @@ const Accessories = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://watch-e-commerce-be.onrender.com/accessories/getList`).then((res) => {
+    axios.get(`https://watch-e-commerce-be-e9sn.onrender.com/accessories/getList`).then((res) => {
       setList(res.data);
     })
   }, [])
@@ -28,7 +28,7 @@ const Accessories = () => {
                   <div className="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div className="card watchcard  rounded-0 h-100" onClick={()=>navigate(`/accessories/${accessory.collectionName}`)}>
                     <div className="card-header  border-bottom-0" style={{ height: "280px" }}>
-                      <img src={`https://watch-e-commerce-be.onrender.com/${accessory.logo.replace(/\\/g, "/")}`} className="img-fluid" alt="" style={{ height: "100%" }} />
+                      <img src={`https://watch-e-commerce-be-e9sn.onrender.com/${accessory.logo.replace(/\\/g, "/")}`} className="img-fluid" alt="" style={{ height: "100%" }} />
                     </div>
                     <div className="card-body text-center">
                          <h6 className="text-secondary mt-2">{accessory.name}</h6>

@@ -10,7 +10,7 @@ const AccessoriesCollectionPage = () => {
 
   useEffect(() => {
     setCollection([])
-    axios.get(`https://watch-e-commerce-be.onrender.com/accessories/category/${name}`).then((res) => {
+    axios.get(`https://watch-e-commerce-be-e9sn.onrender.com/accessories/category/${name}`).then((res) => {
       setCollection(res.data.Products)
     })
   }, [name])
@@ -33,7 +33,7 @@ const AccessoriesCollectionPage = () => {
                   <div className="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div className="card watchcard border-0 rounded-0 h-100">
                       <div className="card-header p-0 border-bottom-0" >
-                        <img src={`https://watch-e-commerce-be.onrender.com/${product.images[0].replace(/\\/g, "/")}`} className="img-fluid object-fit-cover" alt="" style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }}  />
+                        <img src={`https://watch-e-commerce-be-e9sn.onrender.com/${product.images[0].replace(/\\/g, "/")}`} className="img-fluid object-fit-cover" alt="" style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }}  />
                       </div>
                       <div className="card-body text-start">
                         <p className="medium mb-1">

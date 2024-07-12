@@ -22,7 +22,7 @@ const AccessoryDetail = () => {
   useEffect(() => {
     setCollection({})
     setImages([])
-    axios.get(`https://watch-e-commerce-be.onrender.com/accessories/${id}`)
+    axios.get(`https://watch-e-commerce-be-e9sn.onrender.com/accessories/${id}`)
       .then((res) => {
         setCollection(res.data.product);
         setImages(res.data.product.images)
@@ -53,7 +53,7 @@ const AccessoryDetail = () => {
               {images.length ? (
                 images.map((image, index) => (
                   <div key={index} className="item">
-                    <img src={`https://watch-e-commerce-be.onrender.com/${image.replace(/\\/g, "/")}`} className="img-fluid" alt={collection.title} style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }} />
+                    <img src={`https://watch-e-commerce-be-e9sn.onrender.com/${image.replace(/\\/g, "/")}`} className="img-fluid" alt={collection.title} style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }} />
                   </div>
                 ))
               ) : <h2>Loading...</h2>}

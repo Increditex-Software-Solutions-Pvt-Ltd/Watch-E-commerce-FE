@@ -9,10 +9,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../components/Loader';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ADD_TO_CART, CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { state: cartState, dispatch } = useContext(CartContext);
+  const {user} = useContext(AuthContext);
   const [collection, setCollection] = useState({});
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +23,7 @@ const ProductDetails = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const res = await axios.get(`https://watch-e-commerce-be.onrender.com/products/${id}`);
+      const res = await axios.get(`https://watch-e-commerce-be-e9sn.onrender.com/products/${id}`);
       setCollection(res.data.watch);
       setImages(res.data.watch.images);
       setIsLoading(false);
@@ -38,12 +40,20 @@ const ProductDetails = () => {
     return Array.isArray(cartState.cart) && cartState.cart.some(item => item.productId === productId);
   };
 
-  const handleAddToBag = () => {
+  const handleAddToBag = async() => {
     console.log('Adding to bag:', collection);
+    const newCartItem = { ...collection, quantity: 1, cartId: `${collection.productId}-${Date.now()}` }
     dispatch({
       type: ADD_TO_CART,
-      payload: { ...collection, quantity: 1, cartId: `${collection.productId}-${Date.now()}` }
+      payload: newCartItem
     });
+
+    try {
+       await axios.post(`https://watch-e-commerce-be-e9sn.onrender.com/users/${user.userId}/cart`,newCartItem);
+    
+    } catch (error) {
+       console.error("error adding a cart",error);
+    }
   };
 
   return (
@@ -58,7 +68,7 @@ const ProductDetails = () => {
               <OwlCarousel className='owl-theme' loop margin={10} items={1} nav={false} autoplay>
                 {images.map((image, index) => (
                   <div key={index} className="item">
-                    <img src={`https://watch-e-commerce-be.onrender.com/${image.replace(/\\/g, "/")}`} className="img-fluid" alt={collection.title} style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }} />
+                    <img src={`https://watch-e-commerce-be-e9sn.onrender.com/${image.replace(/\\/g, "/")}`} className="img-fluid" alt={collection.title} style={{ width: "100%", aspectRatio: "3/2", objectFit: "contain" }} />
                   </div>
                 ))}
               </OwlCarousel>

@@ -18,127 +18,16 @@ const Collectionpage = () => {
     })
   }, [name])
 
-  console.log(collection);
+
   return (
     <div className="sec-pad text-center">
       <span className="text-dark stylefont fw-light fs-1">{name}</span>
       {collection.length ? '' :
         <Loader />}
       <div className="container-fluid">
-        <div className='row g-4 mt-5'>
-          <div className="col-lg-3 col-md-3 col-sm-12">
-            {/* <div className="card rounded-3 filtercard position-sticky" style={{top:"50px"}}>
-              <div className="card-header" style={{ backgroundColor: '#dfeaf6' }}>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <FontAwesomeIcon icon={faFilter} />
-                    <span className="fs-5 ms-3">Filters</span>
-                  </div>
-                  <div>
-                    <a href="" className="text-secondary medium">Clear all</a>
-                  </div>
-                </div>
-              </div>
-              <div className="card-body" style={{maxHeight:"600px",overflowY:"scroll"}}>
-                <h6 className="text-start">Price</h6>
-
-                <div className="position-relative">
-                  <input type="range" className="form-range mb-4" min="0" max="5" id="customRange2" />
-                  <span className="position-absolute start-0 bottom-0">MIN</span>
-                  <span className="position-absolute end-0 bottom-0">MAX</span>
-                </div>
-
-                <div className="border-bottom border-2 mt-4"></div>
-
-                <div>
-                  <h6 className="text-start pt-3">Strap Material</h6>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" for="flexCheckDefault">
-                      Steel
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" for="flexCheckDefault">
-                      Leather
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" for="flexCheckDefault">
-                      Metal
-                    </label>
-                  </div>
-                </div>
-                <div className="border-bottom border-2 mt-4"></div>
-
-                <div className="mt-3">
-                  <h6 className="text-start pt-3">Strap Color</h6>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" for="flexCheckDefault">
-                      Black
-                    </label>
-                  </div>
-                </div>
-                <div className="border-bottom border-2 mt-4"></div>
-                <div className="mt-3">
-                  <h6 className="text-start pt-3">Dial Color</h6>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="White" id="flexCheckWhite" />
-                    <label className="form-check-label" for="flexCheckWhite">
-                      White
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Black" id="flexCheckBlack" />
-                    <label className="form-check-label" for="flexCheckBlack">
-                      Black
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Gold" id="flexCheckGold" />
-                    <label className="form-check-label" for="flexCheckGold">
-                      Gold
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Blue" id="flexCheckBlue" />
-                    <label className="form-check-label" for="flexCheckBlue">
-                      Blue
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Gray" id="flexCheckGray" />
-                    <label className="form-check-label" for="flexCheckGray">
-                      Gray
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Rose Gold" id="flexCheckRoseGold" />
-                    <label className="form-check-label" for="flexCheckRoseGold">
-                      Rose Gold
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Green" id="flexCheckGreen" />
-                    <label className="form-check-label" for="flexCheckGreen">
-                      Green
-                    </label>
-                  </div>
-                  <div className="form-check text-start mt-3">
-                    <input className="form-check-input" type="checkbox" value="Yellow Gold" id="flexCheckYellowGold" />
-                    <label className="form-check-label" for="flexCheckYellowGold">
-                      Yellow Gold
-                    </label>
-                  </div>
-                </div>
-
-              </div>
-            </div> */}
-          </div>
-          <div className="col-lg-9">
+        <div className='row g-4 mt-5 justify-content-center'>
+        
+          <div className="col-lg-10 ">
             <div className="row g-4 mb-4 overflow-hidden">
               {collection.length ? collection.map((product) => {
                 return (

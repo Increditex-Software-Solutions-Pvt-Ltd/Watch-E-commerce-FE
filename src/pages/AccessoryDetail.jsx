@@ -8,14 +8,14 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Loader from '../components/Loader';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { ADD_TO_CART, CartContext } from '../context/CartContext';
+import { CartContext } from '../context/CartContext';
 
 
 const AccessoryDetail = () => {
     const { id } = useParams();
   const [collection, setCollection] = useState({});
   const [images, setImages] = useState([])
-  const {state:cartState,dispatch} =  useContext(CartContext);
+  const {cart,addToCart} =  useContext(CartContext);
   const navigate = useNavigate();
 
 
@@ -33,13 +33,21 @@ const AccessoryDetail = () => {
   }, [id]);
 
   const isItemInCart = (productId) => {
-    return Array.isArray(cartState.cart) && cartState.cart.some(item => item.productId === productId);
+    return Array.isArray(cart) && cart.some(item => item.productId === productId);
   };
 
-  const handleAddToBag=()=>{
-      dispatch({type:ADD_TO_CART,payload:{...collection,quantity:1,cartId:`${collection.productId}-${Date.now()}`}});
-  }
+  const handleAddToBag = async() => {
+    console.log('Adding to bag:', collection);
+    const newCartItem = { ...collection, quantity: 1, _id: `${collection.productId}` }
+    addToCart(newCartItem);
 
+    // try {
+    //    await axios.post(`https://watch-e-commerce-be-e9sn.onrender.com/users/${user.userId}/cart`,newCartItem);
+    
+    // } catch (error) {
+    //    console.error("error adding a cart",error);
+    // }
+  };
   return (
     <section className="bg-body pb-4">
       {images.length ? (<div className="container">

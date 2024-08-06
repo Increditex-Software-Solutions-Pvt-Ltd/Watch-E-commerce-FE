@@ -3,6 +3,8 @@ import '../uicss/Loginsidebar.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
@@ -64,7 +66,23 @@ const Login = () => {
                 console.log('LOGIN RESPONSE',token,userId);
                 navigate('/');
             } catch (error) {
-                console.log('Error logging in',error.response.data)
+                if (error.response) {
+                    const errorMessage = error.response.data.message;
+                    if (errorMessage === "user not found with this email id") {
+                      toast.error("User not found with this email ID");
+                    }
+                    else if (errorMessage === "invalid password") {
+                      toast.error("Invalid password");
+                    }
+                    else {
+                      toast.error("Login failed");
+                    }
+                  }
+                  else if (error.request) {
+                    toast.error("Network error: No response received from server");
+                  } else {
+                    toast.error("Error: " + error.message);
+                  }
             }
         }
     }
@@ -73,6 +91,7 @@ const Login = () => {
 
     return (
         <div className="container">
+            <ToastContainer/>
             <h3 className="text-dark opacity-75 pb-2 text-center my-5">MY OMEGA</h3>
             <div className="row justify-content-center g-4">
                 <div className="col-lg-5 ">

@@ -8,13 +8,15 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../components/Loader';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { ADD_TO_CART, CartContext } from '../context/CartContext';
+import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
+import { ADD_TO_CART } from '../context/CartContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { state: cartState, dispatch } = useContext(CartContext);
-  const {user} = useContext(AuthContext);
+  const { state, dispatch } = useContext(CartContext);
+  const { user } = useContext(AuthContext);
+
   const [collection, setCollection] = useState({});
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,23 +39,20 @@ const ProductDetails = () => {
   }, [id]);
 
   const isItemInCart = (productId) => {
-    return Array.isArray(cartState.cart) && cartState.cart.some(item => item.productId === productId);
+    return state.cart.some(item => item.productId === productId);
   };
 
-  const handleAddToBag = async() => {
-    console.log('Adding to bag:', collection);
-    const newCartItem = { ...collection, quantity: 1, cartId: `${collection.productId}-${Date.now()}` }
+  const handleAddToBag = () => {
+    const newCartItem = {
+      ...collection,
+      quantity: 1,
+      _id: `${collection._id}`
+    };
+
     dispatch({
       type: ADD_TO_CART,
-      payload: newCartItem
+      payload: newCartItem,
     });
-
-    try {
-       await axios.post(`https://watch-e-commerce-be-e9sn.onrender.com/users/${user.userId}/cart`,newCartItem);
-    
-    } catch (error) {
-       console.error("error adding a cart",error);
-    }
   };
 
   return (
@@ -76,7 +75,7 @@ const ProductDetails = () => {
             <div className="col-lg-5 col-sm-12 col-12">
               <div className="">
                 <span className="text-secondary big" style={{ fontWeight: "500" }}>{collection.modelName}</span>
-                <h4 className="my-4 lt-1" style={{fontSize:'14px'}}>{collection.description}</h4>
+                <h4 className="my-4 lt-1" style={{ fontSize: '14px' }}>{collection.description}</h4>
 
                 <ul className="d-flex flex-row align-items-center list-unstyled gap-1 mt-3 star-color border-2 border-bottom pb-3">
                   <li className="nav-item">

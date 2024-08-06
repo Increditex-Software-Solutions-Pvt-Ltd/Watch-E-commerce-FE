@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { AuthContext } from './AuthContext';
 
 const initialState = {
   cart: [],
@@ -58,7 +59,21 @@ const cartReducer = (state, action) => {
 };
 
 const CartProvider = ({ children }) => {
+  const {user,isAuthenticated} = useContext(AuthContext);
   const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  // useEffect(()=>{
+  //    if(isAuthenticated && user){
+  //      const storedCart = JSON.parse(localStorage.getItem(`cart_${user._id}`)) || [];
+  //      dispatch({type:SET_CART,payload:storedCart})
+  //    }
+  // },[isAuthenticated,user])
+
+  // useEffect(()=>{
+  //    if(isAuthenticated && user){
+  //         localStorage.setItem(`cart_${user._id}`,JSON.stringify(state.cart));
+  //    }
+  // },[isAuthenticated,user,state.cart])
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>

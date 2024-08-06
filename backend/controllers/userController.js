@@ -44,29 +44,29 @@ const userController = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-
+  
       const user = await User.findOne({ emailId: email });
-
+  
       if (!user) {
-        res.status(400).send({ message: "Invalid Credentials" });
+        return res.status(400).send({ message: "Invalid Credentials" });
+      }
+  
+      const storedPassword = user.password;
+      const isPasswordMatch = await bcrypt.compare(password, storedPassword);
+  
+      if (isPasswordMatch) {
+        const token = jwt.sign({ id: user._id }, config.SECRET_KEY, { expiresIn: '6h' });
+        res.header({ "x-auth-token": token });
+        return res.send({ message: "Successful Login", token: token, userId: user._id });
       } else {
-        const storedPassword = user.password;
-        const isPasswordMatch = await bcrypt.compare(password, storedPassword);
-        if (isPasswordMatch) {
-          const token = jwt.sign({ id: user._id }, config.SECRET_KEY, { expiresIn: '6h' });
-          res.header({ "x-auth-token": token });
-          res.send({ message: "Successful Login", token: token, userId: user._id });
-
-
-        } else {
-          res.send({ message: "Invalid Credentials" });
-        }
+        return res.status(400).send({ message: "Invalid Credentials" });
       }
     } catch (error) {
       console.error("Error signing In");
-      res.status(500).json({ message: "Internal Server Error" });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  
   logout: async (req, res) => {
     try {
       // Clear the token on the client-side (assuming you're using JWT for authentication)
@@ -177,34 +177,32 @@ const userController = {
       res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  updateCartItem:async(req,res)=>{
-     try {
+  updateCartItem: async (req, res) => {
+    try {
       const userId = req.params.userId;
-      const { cartId, increment } = req.body;
+      const { _id, increment } = req.body;
       const user = await User.findById(userId);
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
 
-    const cartItem = user.cart.id(cartId);
-    if(cartItem){
-        if(increment){
-           cartItem.quantity += 1
-        }
-        else{
-          cartItem.quantity = Math.max(cartItem.quantity -1,1);
-        }
-        await user.save();
-        res.status(200).json({ message: "Cart item updated", cart: user.cart });
-    }
-    else{
-      res.status(404).json({ message: "Item not found in cart" });
-    }
-     } catch (error) {
-      console.error("Error updating cart item:", error);
+      const cartItem = user.cart.find(item => item._id.toString() === _id);
+      if (!cartItem) {
+        return res.status(404).json({ message: "Item not found in cart" });
+      }
+
+      cartItem.quantity += increment ? 1 : -1;
+      if (cartItem.quantity <= 0) {
+        user.cart = user.cart.filter(item => item._id.toString() !== _id);
+      }
+
+      await user.save();
+      res.status(200).json({ message: "Cart updated successfully", cart: user.cart });
+    } catch (error) {
+      console.error("Error updating cart quantity:", error);
       res.status(500).json({ message: "Internal Server Error" });
-     }
+    }
   },
   removeCartItem: async (req, res) => {
     try {

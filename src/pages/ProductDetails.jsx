@@ -45,8 +45,7 @@ const ProductDetails = () => {
   const handleAddToBag = () => {
     const newCartItem = {
       ...collection,
-      quantity: 1,
-      _id: `${collection._id}`
+      cartId: `${collection.productId}`
     };
 
     dispatch({

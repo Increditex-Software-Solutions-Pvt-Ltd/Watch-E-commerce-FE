@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -128,7 +128,7 @@ const Signup = () => {
             
             </div>
 
-            <a href="" className="text-secondary normal nav-link link mt-3" style={{ fontWeight: "490", fontSize: "16px" }}>Forgot your password?</a>
+            <Link to="" className="text-secondary normal nav-link link mt-3" style={{ fontWeight: "490", fontSize: "16px" }}>Forgot your password?</Link>
             <div className="mt-4">
               <button className="loginbtn" type="submit">SIGNUP</button>
             </div>

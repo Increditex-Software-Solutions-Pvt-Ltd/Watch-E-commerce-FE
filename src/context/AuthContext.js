@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { CartContext, RESET_CART } from './CartContext';
 
 const AuthContext = createContext();
 
@@ -8,6 +9,7 @@ const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  // const { dispatch: cartDispatch } = useContext(CartContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -39,10 +41,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      localStorage.removeItem(`cart_${userId}`);
+    }
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     setIsAuthenticated(false);
     setUser(null);
+    // cartDispatch({ type: RESET_CART });
     navigate('/');
   };
 
